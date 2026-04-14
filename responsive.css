@@ -1,0 +1,162 @@
+/* Responsive layout styles */
+
+/* Base styles are in style.css and components.css */
+
+/* Small devices (phones, up to 576px) */
+@media (max-width: 575.98px) {
+    h1 { font-size: 1.8rem; }
+    h2 { font-size: 1.6rem; }
+    h3 { font-size: 1.3rem; }
+
+    .hero-section {
+        padding: 40px 0;
+        min-height: unset;
+    }
+
+    .daily-limit-display {
+        font-size: 0.95rem;
+        margin-top: 20px;
+    }
+    .daily-limit-display span {
+        font-size: 1.1rem;
+    }
+
+    section {
+        padding: 40px 0;
+    }
+
+    .container {
+        padding: 0 15px;
+    }
+
+    .drop-zone {
+        padding: 25px;
+        margin: 20px 0;
+    }
+    .drop-zone p { font-size: 1rem; }
+
+    .image-preview {
+        max-width: 100%;
+    }
+
+    .enhance-button, .file-select-button, .download-button {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+        width: auto;
+        margin: 5px auto;
+        display: block;
+    }
+    .enhancement-controls, .download-section {
+        text-align: center;
+    }
+
+    /* Comparison Slider Adjustments for Small Screens */
+    .comparison-slider {
+        flex-direction: column;
+        max-width: 100%;
+        margin: 20px auto;
+    }
+    .comparison-slider .image-wrapper,
+    .comparison-slider .enhanced {
+        width: 100%;
+        clip-path: none;
+        position: relative;
+    }
+    .comparison-slider .enhanced { margin-top: 10px; }
+    .comparison-slider .slider {
+        left: 0;
+        width: 100%;
+        height: 5px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .comparison-slider .slider::after {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+     .comparison-slider .image-wrapper h3 {
+        font-size: 0.9rem;
+        top: 5px;
+        left: 5px;
+    }
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+    .container { padding: 0 20px; }
+
+    .drop-zone p { font-size: 1.1rem; }
+    .image-preview { max-width: 80%; }
+
+    .comparison-slider {
+        flex-direction: row;
+        max-width: 800px;
+        margin: 40px auto;
+    }
+    .comparison-slider .image-wrapper,
+    .comparison-slider .enhanced {
+        width: 50%;
+        position: relative;
+        clip-path: initial;
+    }
+     .comparison-slider .original { clip-path: inset(0 50% 0 0); }
+    .comparison-slider .enhanced {
+        position: absolute;
+        clip-path: inset(0 0 0 50%);
+        width: 50%;
+    }
+    .comparison-slider .slider {
+        left: 50%;
+        width: 5px;
+        height: 100%;
+        transform: translateX(-50%);
+    }
+    .comparison-slider .slider::after {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .comparison-slider .image-wrapper h3 {
+        font-size: 1rem;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    h1 { font-size: 2.2rem; }
+    h2 { font-size: 1.8rem; }
+
+    .hero-section {
+        padding: 60px 0;
+    }
+
+    section {
+        padding: 50px 0;
+    }
+
+    header {
+        height: var(--header-height);
+        padding: 0;
+    }
+    .header-container {
+        flex-direction: row;
+    }
+    .logo { margin-bottom: 0; }
+    header nav ul { margin-top: 0; }
+    header nav li { margin-left: 25px; }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 2rem; }
+
+    .hero-section {
+        padding: 80px 0;
+    }
+
+    section {
+        padding: 60px 0;
+    }
+}
