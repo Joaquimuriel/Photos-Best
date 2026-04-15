@@ -1,0 +1,10 @@
+/* config.js.template - placeholder values to be replaced in production */
+const CONFIG = {
+  makerWebhookURL: 'YOUR_MAKER_WEBHOOK_URL',
+  GeminiAPIEndpoint: 'YOUR_GEMINI_API_ENDPOINT',
+  supabaseUrl: 'YOUR_SUPABASE_URL',
+  supabaseAnonKey: 'YOUR_SUPABASE_ANON_KEY',
+  maxPhotosPerDay: 3,
+  maxFileSizeMB: 10,
+  allowedFormats: ['image/jpeg','image/png','image/webp']
+};
