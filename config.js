@@ -5,7 +5,7 @@ var CONFIG = {
   supabaseAnonKey: 'sb_publishable_IqR3gJ03b0xhGyZSNGO7cw_w-uT8fFK',
 
   /* Maker.com Webhook */
-  makerWebhookURL: 'YOUR_MAKER_WEBHOOK_URL',
+  makerWebhookURL: 'https://hook.us2.make.com/lcr2uc0ikvu4rapb84no5g0schpocnle',
 
   /* Gemini API */
   geminiAPIEndpoint: 'YOUR_GEMINI_API_ENDPOINT',

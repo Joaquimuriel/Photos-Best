@@ -193,10 +193,54 @@
       Utils.saveToSupabase(originalUrl, enhancedUrl);
   }
 
-  /* --- Api Module (Encapsulated Mock Functions) --- */
+  /* --- Api Module (Encapsulated - Chamada REAL ao Maker.com) --- */
   var Api = (function(){
     function simulateDelay(ms, callback){
       setTimeout(callback, ms);
+    }
+
+    // Função para fazer chamada REAL ao Maker.com webhook
+    function sendToMakerWebhook(photoId, photoDataURL, callback) {
+        var webhookUrl = CONFIG.makerWebhookURL;
+        
+        if (!webhookUrl || webhookUrl === 'YOUR_MAKER_WEBHOOK_URL') {
+            console.log('Maker webhook URL não configurada. Usando mock.');
+            mockMakerApiCall(photoId, photoDataURL, callback);
+            return;
+        }
+
+        console.log('Enviando foto para Maker.com webhook:', webhookUrl);
+        
+        // Enviar para o webhook do Make.com
+        fetch(webhookUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                photoId: photoId,
+                photo: photoDataURL, // Base64 da imagem
+                timestamp: new Date().toISOString()
+            })
+        })
+        .then(function(response) {
+            if (!response.ok) {
+                throw new Error('HTTP error! status: ' + response.status);
+            }
+            return response.json();
+        })
+        .then(function(data) {
+            console.log('Resposta do Maker.com:', data);
+            callback({ 
+                success: true, 
+                enhancedPhotoUrl: data.enhancedPhotoUrl || data.url || data.resultUrl
+            });
+        })
+        .catch(function(error) {
+            console.error('Erro ao chamar Maker.com:', error);
+            // Fallback para mock em caso de erro
+            mockMakerApiCall(photoId, photoDataURL, callback);
+        });
     }
 
     function mockMakerApiCall(photoId, photoURL, callback){
@@ -216,6 +260,7 @@
     }
 
     return {
+        sendToMakerWebhook: sendToMakerWebhook,
         mockMakerApiCall: mockMakerApiCall,
         mockGeminiApiCall: mockGeminiApiCall
     };
@@ -340,8 +385,8 @@
               var photoId = 'temp_' + Date.now();
               var photoURL = originalImageUrl;
 
-              console.log('Calling mockMakerApiCall...');
-              Api.mockMakerApiCall(photoId, photoURL, function(makerResponse){
+              console.log('Calling Maker.com webhook...');
+              Api.sendToMakerWebhook(photoId, photoURL, function(makerResponse){
                   console.log('Maker response:', makerResponse);
                   if (makerResponse.success) {
                       Api.mockGeminiApiCall(makerResponse.enhancedPhotoUrl, function(geminiResponse){
